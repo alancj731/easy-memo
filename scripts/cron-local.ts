@@ -13,12 +13,7 @@ cron.schedule(`*/${cronMinutes} * * * *`, async () => {
   console.log("[Cron] Job triggered at:", new Date().toISOString());
 
   try {
-    // Your cron job logic here
-    console.log("[Cron] Job completed successfully");
-    // read file from data/magic_file.txt
-
     const data = fs.readFileSync("data/magic_file.txt", "utf-8");
-    console.log("[Cron] File content:", data);
 
     const items = getTitleAndContent(data);
 
