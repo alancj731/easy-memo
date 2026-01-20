@@ -1,7 +1,7 @@
 "use client"
 
 import { RecordCard } from "./record-card"
-import { SearchX, Sparkles } from "lucide-react"
+import { Ghost, Sparkles } from "lucide-react"
 import type { Record } from "@/src/app/page"
 
 interface SearchResultsProps {
@@ -26,13 +26,13 @@ export function SearchResults({ records, total, query, isLoading }: SearchResult
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
         <div className="p-5 rounded-2xl bg-muted/50 border border-border/50 mb-6">
-          <SearchX className="h-10 w-10 text-muted-foreground" />
+          <Ghost className="h-10 w-10 text-muted-foreground" />
         </div>
         <h3 className="text-xl font-semibold mb-2">No records found</h3>
         <p className="text-muted-foreground text-sm max-w-sm">
           {query 
             ? `No records matching "${query}". Try a different search term.`
-            : "No records in the database yet."
+            : "We searched the whole database, nothing found so far ..."
           }
         </p>
       </div>
