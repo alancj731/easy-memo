@@ -35,14 +35,10 @@ export async function GET(request: Request) {
     
     const records = await sql`
       SELECT id, title, content, created_at, updated_at 
-      FROM records 
+      FROM memo
       WHERE title ILIKE ${searchPattern} 
          OR content ILIKE ${searchPattern}
       ORDER BY 
-        CASE 
-          WHEN title ILIKE ${searchPattern} THEN 1 
-          ELSE 2 
-        END,
         created_at DESC
     `
 

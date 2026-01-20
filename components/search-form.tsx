@@ -30,7 +30,7 @@ export function SearchForm({ onSearch, initialQuery = "" }: SearchFormProps) {
         clearTimeout(debounceRef.current)
       }
     }
-  }, [query, onSearch])
+  }, [onSearch])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
