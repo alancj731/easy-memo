@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FileText, Calendar } from "lucide-react"
+import { FileText, Calendar, Trash2 } from "lucide-react"
 import type { Record } from "@/src/app/page"
 
 interface RecordCardProps {
@@ -34,7 +34,7 @@ export function RecordCard({ record, searchQuery }: RecordCardProps) {
 
   return (
     <Card className="group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/30 bg-card/50 backdrop-blur-sm border-border/50">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 relative">
         <div className="flex items-start gap-4">
           <div className="p-3 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 group-hover:from-primary/30 group-hover:to-primary/10 transition-colors">
             <FileText className="h-5 w-5 text-primary" />
@@ -48,6 +48,12 @@ export function RecordCard({ record, searchQuery }: RecordCardProps) {
               <span>{formattedDate}</span>
             </div>
           </div>
+          <button
+            className="absolute top-4 right-4 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+            aria-label="Delete record"
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
         </div>
       </CardHeader>
       {record.content && (
