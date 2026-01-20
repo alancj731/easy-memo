@@ -76,7 +76,7 @@ export default function SearchPage() {
         </div>
         
         <footer className="mt-16 text-end text-sm text-muted-foreground italic">
-          <p>created by <span className='hover:text-primary'><a href='https://www.linkedin.com/in/winnipegdatafan/'>jian</a></span></p>
+          <p>created by <span className='font-bold text-chart-2 hover:text-primary'><a href='https://www.linkedin.com/in/winnipegdatafan/'>jian</a></span></p>
         </footer>
       </div>
     </main>

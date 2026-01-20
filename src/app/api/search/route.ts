@@ -19,14 +19,9 @@ export async function GET(request: Request) {
     const sql = neon(process.env.NEXT_PUBLIC_DATABASE_URL!)
     
     if (!query.trim()) {
-      const records = await sql`
-        SELECT id, title, content, created_at, updated_at 
-        FROM memo
-        ORDER BY created_at DESC
-      `
       return NextResponse.json({
-        records,
-        total: records.length,
+        records: [],
+        total: 0,
         query: ""
       })
     }
