@@ -110,8 +110,8 @@ Wait for the cron job to run (or run `npm run cron:local` manually), then refres
 ### Deleting Records via Web UI
 
 1. Find the memo you want to delete in the search results
-2. Click the delete button/icon on the record card
-3. The record will be removed from both the UI and database
+2. Hover your mouse over it and click the trash icon that appears.
+3. The record will be removed from the database
 
 ### API Endpoints (via localhost:6789)
 
