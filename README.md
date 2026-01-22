@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Easy Memo
+
+A simple memo/note-taking application built with Next.js, PostgreSQL (Neon), and Tailwind CSS.
+
+## Features
+
+- **Search Functionality**: Search memos by title or content with real-time filtering
+- **Quick Add via Magic File**: Add memos by writing to `data/magic_file.txt` - a cron job automatically imports them
+- **Dark Mode UI**: Clean, modern interface with dark theme
+- **Responsive Design**: Works on desktop and mobile devices
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Database**: Neon PostgreSQL (serverless)
+- **Styling**: Tailwind CSS + Radix UI
+- **Scheduling**: node-cron for automated imports
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 22+
+- Neon PostgreSQL database
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   cp env.example .env
+   ```
+   
+   Edit `.env` and add your Neon database connection string:
+   ```
+   NEXT_PUBLIC_DATABASE_URL=your_neon_connection_string
+   NEXT_PUBLIC_CRON_MINUTES=10  # Optional: cron job interval, default 5 minutes
+   ```
+
+4. Initialize the database:
+   ```bash
+   npm run init-db
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://127.0.0.1:6789](http://127.0.0.1:6789) in your browser
+
+## Adding Memos
+
+### Via Magic File
+
+Write memos to `data/magic_file.txt` in the following format:
+```
+title 1
+---
+content 1
+===
+title 2
+---
+content 2
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The cron job (runs every 10 minutes by default) will automatically import these into the database.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Available Scripts
 
-## Learn More
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server with cron job |
+| `npm run lint` | Run ESLint |
+| `npm run init-db` | Initialize database table |
+| `npm run cron:local` | Run cron job locally |
 
-To learn more about Next.js, take a look at the following resources:
+## API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `GET /api/search?q=<query>` - Search memos
+- `DELETE /api/delete?id=<id>` - Delete a memo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+easy-memo/
+├── src/
+│   ├── app/              # Next.js App Router pages
+│   │   ├── api/          # API routes
+│   │   ├── page.tsx      # Main search page
+│   │   └── layout.tsx    # Root layout
+│   ├── actions/          # Server actions
+│   └── components/       # React components
+├── scripts/
+│   ├── init-db.ts        # Database initialization
+│   └── cron-local.ts     # Cron job script
+├── data/                 # Magic file storage
+├── components/           # Shared UI components
+└── lib/                  # Utility functions
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
