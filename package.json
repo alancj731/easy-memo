@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "concurrently \"next start --hostname 127.0.0.1 --port 6789\" \"npm run cron:local\"",
     "lint": "eslint .",
-    "cron:local": "npx tsx scripts/cron-local.ts"
+    "cron:local": "npx tsx scripts/cron-local.ts",
+    "init-db": "npx tsx scripts/init-db.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

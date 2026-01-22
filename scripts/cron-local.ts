@@ -36,7 +36,6 @@ async function insertToDatabase(items: { title: string; content: string }[]) {
     console.log("[Cron] No items to insert");
     return;
   }
-  items = items.filter(item => item.title && item.content);
 
   const databaseUrl = process.env.NEXT_PUBLIC_DATABASE_URL;
   if (!databaseUrl) {
@@ -62,13 +61,16 @@ function cleanMagigFile() {
 function getTitleAndContent(
   data: string,
 ): { title: string; content: string }[] {
+  if (!data.trim()) {
+    return [];
+  }
   const items = data.split("===").map((line) => {
     const seperated = line.split("---");
     const title = seperated[0].trim().replace(/\n/g, " ");
     const content = seperated[1]?.trim().replace(/\n/g, " ") || "";
     return { title, content };
   });
-  return items;
+  return items.filter(item => item.title && item.content);
 }
 
 console.log(`[Cron] Scheduler will run every ${cronMinutes} minutes`);
