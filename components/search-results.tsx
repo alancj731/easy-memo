@@ -9,9 +9,10 @@ interface SearchResultsProps {
   total: number
   query: string
   isLoading?: boolean
+  onDeleteRecord?: (id: number) => void
 }
 
-export function SearchResults({ records, total, query, isLoading }: SearchResultsProps) {
+export function SearchResults({ records, total, query, isLoading, onDeleteRecord }: SearchResultsProps) {
   if (isLoading) {
     return (
       <div className="grid gap-4">
@@ -60,7 +61,7 @@ export function SearchResults({ records, total, query, isLoading }: SearchResult
       </div>
       <div className="grid gap-4">
         {records.map((record) => (
-          <RecordCard key={record.id} record={record} searchQuery={query} />
+          <RecordCard key={record.id} record={record} searchQuery={query} onDelete={onDeleteRecord} />
         ))}
       </div>
     </div>

@@ -15,6 +15,11 @@ cron.schedule(`*/${cronMinutes} * * * *`, async () => {
   try {
     const data = fs.readFileSync("data/magic_file.txt", "utf-8");
 
+    if (!data.trim()) {
+      console.log("[Cron] No data found in magic_file.txt");
+      return;
+    }
+
     const items = getTitleAndContent(data);
 
     await insertToDatabase(items);
@@ -31,6 +36,7 @@ async function insertToDatabase(items: { title: string; content: string }[]) {
     console.log("[Cron] No items to insert");
     return;
   }
+  items = items.filter(item => item.title && item.content);
 
   const databaseUrl = process.env.NEXT_PUBLIC_DATABASE_URL;
   if (!databaseUrl) {

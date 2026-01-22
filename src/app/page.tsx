@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { SearchForm } from "@/components/search-form"
 import { SearchResults } from "@/components/search-results"
 import { Database, Sparkles } from "lucide-react"
+import { Toaster } from "sonner"
 
 export interface Record {
   id: number
@@ -20,6 +21,10 @@ export default function SearchPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [initialLoad, setInitialLoad] = useState(true)
   const abortControllerRef = useRef<AbortController | null>(null)
+  const handleDeleteRecord = useCallback((id: number) => {
+    setRecords((prev) => prev.filter((r) => r.id !== id))
+    setTotal((prev) => Math.max(0, prev - 1))
+  }, [])
 
   const handleSearch = useCallback(async (searchQuery: string) => {
     if (abortControllerRef.current) {
@@ -61,6 +66,7 @@ export default function SearchPage() {
 
   return (
     <main className="min-h-screen bg-background dark">
+      <Toaster position="top-center" theme="dark" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
       
       <div className="relative max-w-4xl mx-auto px-4 py-16">
@@ -72,6 +78,7 @@ export default function SearchPage() {
             total={total} 
             query={query}
             isLoading={isLoading}
+            onDeleteRecord={handleDeleteRecord}
           />
         </div>
         
