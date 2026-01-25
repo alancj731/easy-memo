@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 6789",
     "build": "next build",
-    "start": "concurrently \"next start --hostname 127.0.0.1 --port 6789\" \"npm run cron:local\"",
+    "start": "next start",
     "lint": "eslint .",
     "cron:local": "npx tsx scripts/cron-local.ts",
     "init-db": "npx tsx scripts/init-db.ts"

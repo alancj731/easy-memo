@@ -48,7 +48,7 @@ export function SearchForm({ onSearch, initialQuery = "" }: SearchFormProps) {
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
           type="text"
-          placeholder="Search records by title or content..."
+          placeholder="Search records by title or content, try aws for demo ..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="pl-12 h-14 text-white bg-card border-border/50 focus:border-primary/50 focus:ring-primary/20 rounded-xl shadow-sm"

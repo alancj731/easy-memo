@@ -81,7 +81,7 @@ export function RecordCard({ record, searchQuery, onDelete }: RecordCardProps) {
               aria-label="Delete record"
               onClick={(e) => {
                 e.stopPropagation()
-                setShowConfirm(true)
+                 toast.error("Sorry, you can't delete records for demo.")
               }}
             >
               <Trash2 className="h-4 w-4" />
